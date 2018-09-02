@@ -211,23 +211,23 @@ impl<R: Iterator<Item=Result<Key, std::io::Error>>, W: Write> Game<R, W> {
                     // Check if it was a mine.
                     let (x, y) = (self.x, self.y);
                     if first_click {
-						loop {
-							for &(x, y) in self.adjacent(x, y).iter() {
-								if self.get(x, y).mine {
-									for i in 0..self.grid.len() {
-										self.grid[i] = Cell {
-											mine: false,
-											revealed: false,
-											observed: false,
-										};
-									}
-									continue;
-								}
-							}
-							break;
-						}
-						first_click = false;
-					}
+                        loop {
+                            for &(x, y) in self.adjacent(x, y).iter() {
+                                if self.get(x, y).mine {
+                                    for i in 0..self.grid.len() {
+                                        self.grid[i] = Cell {
+                                            mine: false,
+                                            revealed: false,
+                                            observed: false,
+                                        };
+                                    }
+                                    continue;
+                                }
+                            }
+                            break;
+                        }
+                        first_click = false;
+                    }
                     if self.get(x, y).mine {
                         self.game_over();
                         return;
